@@ -33,19 +33,22 @@
     if (_detailItem != newDetailItem) {
         [_detailItem release];
         _detailItem = [newDetailItem retain];
-
-        // Update the view.
-        [self configureView];
     }
+    
+    // Update the view.
+    [self configureView];
 }
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-
+    // Update the user interface for the detail item.   
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8888/index.html"]]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.detailItem]
+                                                 cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                             timeoutInterval:30];
+        
+        [_webView loadRequest:request];
     }
 }
 

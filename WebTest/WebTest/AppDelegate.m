@@ -34,6 +34,13 @@
     return YES;
 }
 
+- (void)alertView:(UIAlertView *)view clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Succeed, leave store, fail stay
+    if (buttonIndex == 0)
+        [_navigationController popViewControllerAnimated:YES];    
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 
     // Make sure that the URL Host is "Application"
@@ -65,13 +72,11 @@
             UIAlertView *alertView;
             alertView = [[UIAlertView alloc] initWithTitle:@"In-App Purchase"
                                                    message:val 
-                                                  delegate:nil 
-                                         cancelButtonTitle:@"OK" 
-                                         otherButtonTitles:nil];
+                                                  delegate:self
+                                         cancelButtonTitle:@"Succeed" 
+                                         otherButtonTitles:@"Fail",nil];
             [alertView show];
-            [alertView release];
-            
-            [_navigationController popViewControllerAnimated:YES];
+            [alertView release];            
         }
         else if ([cmd compare:@"get"] == NSOrderedSame)
         {
