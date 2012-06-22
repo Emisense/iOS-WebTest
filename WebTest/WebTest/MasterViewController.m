@@ -68,6 +68,7 @@
 
 	[urlTextField resignFirstResponder];
     self.detailViewController.detailItem = urlTextField.text;
+    self.detailViewController.title = @"PEAR Store";
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
