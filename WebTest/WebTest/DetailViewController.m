@@ -39,6 +39,16 @@
     [self configureView];
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+//    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)configureView
 {
     // Update the user interface for the detail item.   
