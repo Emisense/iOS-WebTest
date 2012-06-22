@@ -10,7 +10,7 @@
 
 @class DetailViewController;
 
-@interface MasterViewController : UIViewController <UITextFieldDelegate> {
+@interface MasterViewController : UIViewController <UITextFieldDelegate, UINavigationControllerDelegate> {
     IBOutlet UITextField *urlTextField;
 }
 

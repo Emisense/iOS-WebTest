@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "MasterViewController.h"
+#import "DetailViewController.h"
 
 @implementation AppDelegate
 
@@ -29,6 +30,7 @@
 
     MasterViewController *masterViewController = [[[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil] autorelease];
     self.navigationController = [[[UINavigationController alloc] initWithRootViewController:masterViewController] autorelease];
+    self.navigationController.delegate = masterViewController;
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -88,8 +90,9 @@
                                          otherButtonTitles:nil];
             [alertView show];
             [alertView release];
+
             
-            [_navigationController popViewControllerAnimated:YES];            
+            [_navigationController popViewControllerAnimated:YES];
         }
         else if ([cmd compare:@"exit"] == NSOrderedSame)
         {

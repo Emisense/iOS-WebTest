@@ -49,6 +49,15 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated                
+{
+    // If we just became the current view, clear the web view to an empty page
+    if (navigationController.visibleViewController == self)
+    {
+        [self.detailViewController.webView loadHTMLString:@"<html><head></head><body></body></html>" baseURL:nil];        
+    }
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
