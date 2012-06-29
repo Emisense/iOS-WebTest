@@ -10,6 +10,8 @@
 
 @interface DetailViewController : UIViewController <UIWebViewDelegate>
 
+- (IBAction)bail:(id)sender;
+
 @property (strong, nonatomic) id detailItem;
 
 @property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;

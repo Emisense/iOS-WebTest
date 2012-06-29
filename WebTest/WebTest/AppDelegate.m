@@ -40,7 +40,10 @@
 {
     // Succeed, leave store, fail stay
     if (buttonIndex == 0)
-        [_navigationController popViewControllerAnimated:YES];    
+    {
+        [_navigationController popViewControllerAnimated:YES];
+        _navigationController.navigationBar.hidden = NO;
+    }
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
@@ -93,10 +96,12 @@
 
             
             [_navigationController popViewControllerAnimated:YES];
+            _navigationController.navigationBar.hidden = NO;
         }
         else if ([cmd compare:@"exit"] == NSOrderedSame)
         {
             [_navigationController popViewControllerAnimated:YES];
+            _navigationController.navigationBar.hidden = NO;
         }
         else
         {

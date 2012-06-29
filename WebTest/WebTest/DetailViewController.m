@@ -41,12 +41,28 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-//    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if (self.navigationController.visibleViewController == self)
+    {
+        [_webView setHidden:NO];
+        [_webView setNeedsDisplay];
+    }
+    else
+        self.navigationController.navigationBar.hidden = NO;
+}
+
+- (IBAction)bail:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];    
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self performSelector:@selector(bail:) withObject:self afterDelay:2.0];
 }
 
 - (void)configureView
@@ -58,6 +74,7 @@
                                                  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                              timeoutInterval:30];
         
+        [_webView setHidden:YES];
         [_webView loadRequest:request];
     }
 }
