@@ -39,6 +39,27 @@
     [self configureView];
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
+                                     navigationType:(UIWebViewNavigationType)navigationType
+{
+    // Grab request URL
+    NSURL *url = [request URL];
+
+    // Same subfolder on same server?
+    NSRange lastslash = [self.detailItem rangeOfString:@"/" options:NSBackwardsSearch];
+    NSString *detailRoot = [self.detailItem substringToIndex:lastslash.location + 1];
+    
+    NSString *baseString = [[url absoluteString] substringToIndex:lastslash.location + 1];
+    
+    if ([ baseString compare:detailRoot] == NSOrderedSame)
+        return YES;
+    else 
+    {
+        [[UIApplication sharedApplication] openURL:url];
+        return NO;
+    }
+}
+
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
 }
