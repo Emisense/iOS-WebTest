@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "EffectsPlayer.h"
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
@@ -45,27 +46,131 @@
     // Grab request URL
     NSURL *url = [request URL];
 
+    NSLog(@"New Request: %@", [url absoluteString]);
+    
+    if ([[url scheme] compare:@"pearsports"] == NSOrderedSame)
+    {
+        NSLog(@"Handling as pearsports...");
+        
+        if ([[[url host] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] compare:@"Application"] == NSOrderedSame)
+        {
+            // Extract the query portion and convert it into a parameter dictionary
+            NSString *query = [[url query] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+            
+            for (NSString *param in [query componentsSeparatedByString:@"&"])
+            {
+                NSArray *elts = [param componentsSeparatedByString:@"="];
+                if ([elts count] < 2)
+                    continue;
+                [params setObject:[elts objectAtIndex:1] forKey:[elts objectAtIndex:0]];
+            }
+            
+            // For now, look for 'cmd' and 'val'
+            NSString *cmd = [params objectForKey:@"cmd"];
+            NSString *val = [params objectForKey:@"val"];
+            
+            if ([cmd compare:@"sound"] == NSOrderedSame)
+            {
+                int sound = [val intValue];
+                
+                if (sound == 0)
+                    [[EffectsPlayer instance] snap];
+                else if (sound == 1)
+                    [[EffectsPlayer instance] squish];
+                else if (sound == 2)
+                    [[EffectsPlayer instance] clank];
+            }
+            else if ([cmd compare:@"buy"] == NSOrderedSame)
+            {
+                UIAlertView *alertView;
+                alertView = [[UIAlertView alloc] initWithTitle:@"In-App Purchase"
+                                                       message:val
+                                                      delegate:nil
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles: nil];
+                [alertView show];
+                [alertView release];
+                [self bail:self];
+            }
+            else if ([cmd compare:@"get"] == NSOrderedSame)
+            {
+                UIAlertView *alertView;
+                alertView = [[UIAlertView alloc] initWithTitle:@"Download Plan"
+                                                       message:val
+                                                      delegate:nil
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+                [alertView show];
+                [alertView release];
+                
+                [self bail:self];
+            }
+            else if ([cmd compare:@"exit"] == NSOrderedSame)
+            {
+                [self bail:self];
+            }
+            else
+            {
+                UIAlertView *alertView;
+                alertView = [[UIAlertView alloc] initWithTitle:cmd
+                                                       message:val
+                                                      delegate:nil
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+                [alertView show];
+                [alertView release];
+            }
+
+        }
+        
+        return NO;
+    }
+    
     // Same subfolder on same server?
     NSRange lastslash = [self.detailItem rangeOfString:@"/" options:NSBackwardsSearch];
     NSString *detailRoot = [self.detailItem substringToIndex:lastslash.location + 1];
     
-    NSString *baseString = [[url absoluteString] substringToIndex:lastslash.location + 1];
+    NSLog(@"Original URL: %@", self.detailItem);
+    NSLog(@"Original Base: %@", detailRoot);
     
-    if ([ baseString compare:detailRoot] == NSOrderedSame)
-        return YES;
-    else 
+    NSString *absoluteURL = [[url absoluteURL] absoluteString];
+    NSLog(@"New URL as absolute: %@", absoluteURL);
+    
+    if ([absoluteURL length] < [detailRoot length])
     {
+        NSLog(@"Outside store...");
         [[UIApplication sharedApplication] openURL:url];
         return NO;
+    }
+    else
+    {
+        NSString *baseString = [absoluteURL substringToIndex:lastslash.location + 1];
+        
+        if ([ baseString compare:detailRoot] == NSOrderedSame)
+        {
+            NSLog(@"In Store...");
+            return YES;
+        }
+        else 
+        {
+            NSLog(@"Outside store...");
+            [[UIApplication sharedApplication] openURL:url];
+            return NO;
+        }
     }
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    NSLog(@"Load Started");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    NSLog(@"Load Finished");
+    
     if (self.navigationController.visibleViewController == self)
     {
         [_webView setHidden:NO];

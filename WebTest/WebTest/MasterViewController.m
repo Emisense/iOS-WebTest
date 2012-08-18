@@ -82,4 +82,24 @@
     self.navigationController.navigationBar.hidden = YES;    
 }
 
+- (IBAction)downLoadPress:(id)sender
+{
+    NSURL *URL;
+    
+	[urlTextField resignFirstResponder];
+    URL = [NSURL URLWithString:urlTextField.text];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:20];
+    
+    [request setHTTPMethod: @"GET"];
+    
+    NSData *webData;
+    NSLog(@"Start Download");
+    webData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSLog(@"Stop Download");
+    NSLog(@"Download size: %d", [webData length]);
+}
+
 @end

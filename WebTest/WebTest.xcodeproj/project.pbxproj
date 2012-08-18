@@ -17,6 +17,12 @@
 		D807932E1593DE5800938B82 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D807932D1593DE5800938B82 /* DetailViewController.m */; };
 		D80793311593DE5800938B82 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D807932F1593DE5800938B82 /* MasterViewController.xib */; };
 		D80793341593DE5800938B82 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80793321593DE5800938B82 /* DetailViewController.xib */; };
+		D8F7B2AF15E00E2F00CE61FD /* EffectsPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F7B2AE15E00E2F00CE61FD /* EffectsPlayer.m */; };
+		D8F7B2B415E00E5F00CE61FD /* clank.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D8F7B2B115E00E5F00CE61FD /* clank.mp3 */; };
+		D8F7B2B515E00E5F00CE61FD /* snap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D8F7B2B215E00E5F00CE61FD /* snap.mp3 */; };
+		D8F7B2B615E00E5F00CE61FD /* squish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D8F7B2B315E00E5F00CE61FD /* squish.mp3 */; };
+		D8F7B2B815E0101B00CE61FD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F7B2B715E0101B00CE61FD /* AVFoundation.framework */; };
+		D8F7B2BA15E0102800CE61FD /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F7B2B915E0102800CE61FD /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +42,13 @@
 		D807932D1593DE5800938B82 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		D80793301593DE5800938B82 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
 		D80793331593DE5800938B82 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		D8F7B2AD15E00E2F00CE61FD /* EffectsPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsPlayer.h; sourceTree = "<group>"; };
+		D8F7B2AE15E00E2F00CE61FD /* EffectsPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectsPlayer.m; sourceTree = "<group>"; };
+		D8F7B2B115E00E5F00CE61FD /* clank.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clank.mp3; sourceTree = "<group>"; };
+		D8F7B2B215E00E5F00CE61FD /* snap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = snap.mp3; sourceTree = "<group>"; };
+		D8F7B2B315E00E5F00CE61FD /* squish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = squish.mp3; sourceTree = "<group>"; };
+		D8F7B2B715E0101B00CE61FD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D8F7B2B915E0102800CE61FD /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8F7B2BA15E0102800CE61FD /* MediaPlayer.framework in Frameworks */,
+				D8F7B2B815E0101B00CE61FD /* AVFoundation.framework in Frameworks */,
 				D80793181593DE5700938B82 /* UIKit.framework in Frameworks */,
 				D807931A1593DE5700938B82 /* Foundation.framework in Frameworks */,
 				D807931C1593DE5700938B82 /* CoreGraphics.framework in Frameworks */,
@@ -55,6 +70,8 @@
 		D80793081593DE5700938B82 = {
 			isa = PBXGroup;
 			children = (
+				D8F7B2B915E0102800CE61FD /* MediaPlayer.framework */,
+				D8F7B2B715E0101B00CE61FD /* AVFoundation.framework */,
 				D807931D1593DE5700938B82 /* WebTest */,
 				D80793161593DE5700938B82 /* Frameworks */,
 				D80793141593DE5700938B82 /* Products */,
@@ -82,6 +99,8 @@
 		D807931D1593DE5700938B82 /* WebTest */ = {
 			isa = PBXGroup;
 			children = (
+				D8F7B2AD15E00E2F00CE61FD /* EffectsPlayer.h */,
+				D8F7B2AE15E00E2F00CE61FD /* EffectsPlayer.m */,
 				D80793261593DE5700938B82 /* AppDelegate.h */,
 				D80793271593DE5700938B82 /* AppDelegate.m */,
 				D80793291593DE5700938B82 /* MasterViewController.h */,
@@ -98,6 +117,9 @@
 		D807931E1593DE5700938B82 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D8F7B2B115E00E5F00CE61FD /* clank.mp3 */,
+				D8F7B2B215E00E5F00CE61FD /* snap.mp3 */,
+				D8F7B2B315E00E5F00CE61FD /* squish.mp3 */,
 				D807931F1593DE5700938B82 /* WebTest-Info.plist */,
 				D80793201593DE5700938B82 /* InfoPlist.strings */,
 				D80793231593DE5700938B82 /* main.m */,
@@ -159,6 +181,9 @@
 				D80793221593DE5700938B82 /* InfoPlist.strings in Resources */,
 				D80793311593DE5800938B82 /* MasterViewController.xib in Resources */,
 				D80793341593DE5800938B82 /* DetailViewController.xib in Resources */,
+				D8F7B2B415E00E5F00CE61FD /* clank.mp3 in Resources */,
+				D8F7B2B515E00E5F00CE61FD /* snap.mp3 in Resources */,
+				D8F7B2B615E00E5F00CE61FD /* squish.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +198,7 @@
 				D80793281593DE5700938B82 /* AppDelegate.m in Sources */,
 				D807932B1593DE5700938B82 /* MasterViewController.m in Sources */,
 				D807932E1593DE5800938B82 /* DetailViewController.m in Sources */,
+				D8F7B2AF15E00E2F00CE61FD /* EffectsPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

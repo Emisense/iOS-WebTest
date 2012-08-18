@@ -15,6 +15,7 @@
 }
 
 - (IBAction)openStore:(id)sender;
+- (IBAction)downLoadPress:(id)sender;
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 @property (nonatomic, retain) UITextField *urlTextField;
